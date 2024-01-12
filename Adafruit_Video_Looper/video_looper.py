@@ -15,6 +15,7 @@ import json
 import threading
 from datetime import datetime
 import RPi.GPIO as GPIO
+import random
 
 from .alsa_config import parse_hw_device
 from .model import Playlist, Movie
@@ -484,8 +485,30 @@ class VideoLooper:
         self._prepare_to_run_playlist(self._playlist)
         self._set_hardware_volume()
         movie = self._playlist.get_next(self._is_random, self._resume_playlist)
+
+        # set pause and resume time and related variables
+        pause_time = time.time() + random.randint(10, 20)
+        resume_time = pause_time + random.randint(5,10)
+        has_started = False
+        is_paused = False
+
         # Main loop to play videos in the playlist and listen for file changes.
         while self._running:
+
+            # logic for pausing and resuming
+            if has_started:
+                if time.time() >= pause_time and not is_paused:
+                    self._player.pause()
+                    is_paused = True
+                if time.time() >= resume_time and is_paused:
+                    self._player.pause()
+                    is_paused = False
+                    # reset timers for next pause and resume cycle
+                    pause_time = time.time() + random.randint(10, 20)
+                    resume_time = pause_time + random.randint(5,10)
+
+
+
             # Load and play a new movie if nothing is playing.
             if not self._player.is_playing() and not self._playbackStopped:
                 if movie is not None: #just to avoid errors
@@ -522,6 +545,7 @@ class VideoLooper:
                     self._print('Playing movie: {0} {1}'.format(movie, infotext))
                     # todo: maybe clear screen to black so that background (image/color) is not visible for videos with a resolution that is < screen resolution
                     self._player.play(movie, loop=-1 if self._playlist.length()==1 else None, vol = self._sound_vol)
+                    has_started = True
 
             # Check for changes in the file search path (like USB drives added)
             # and rebuild the playlist.
