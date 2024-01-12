@@ -2,7 +2,7 @@
 An application to turn your Raspberry Pi into a dedicated looping video playback device.
 Can be used in art installations, fairs, theatre, events, infoscreens, advertisements etc...
 
-Works right out of the box, but also has a lot of customisation options to make it fit your use case. See the [video_looper.ini](https://github.com/adafruit/pi_video_looper/blob/master/assets/video_looper.ini) configuration file for an overview of options. 
+Works right out of the box, but also has a lot of customisation options to make it fit your use case. See the [video_looper.ini](https://github.com/AidanNelson/pi_video_looper/blob/master/assets/video_looper.ini) configuration file for an overview of options. 
 
 If you miss a feature just post an issue here on Github. (https://github.com/adafruit/pi_video_looper)
 
@@ -115,7 +115,7 @@ There are also pre-compiled images available from <https://videolooper.de> (but 
 ## How to install
 `sudo apt-get install git`  
 `cd ~`  
-`git clone https://github.com/adafruit/pi_video_looper`  
+`git clone https://github.com/AidanNelson/pi_video_looper`  
 `cd pi_video_looper`  
 `sudo ./install.sh`
 
@@ -131,7 +131,7 @@ For backing up the current ini:
 For the update:    
 `cd ~`   
 `sudo rm -rf pi_video_looper`   
-`git clone https://github.com/adafruit/pi_video_looper`    
+`git clone https://github.com/AidanNelson/pi_video_looper`    
 `cd pi_video_looper`   
 `sudo ./install.sh` 
 
@@ -165,7 +165,7 @@ The video looper can be controlled via keyboard input or via configured GPIO pin
 keyboard control is enabled by default via the ini setting `keyboard_control`
 
 #### keyboard commands:
-The following keyboard commands are active by default (can be disabled in the [video_looper.ini](https://github.com/adafruit/pi_video_looper/blob/master/assets/video_looper.ini)):
+The following keyboard commands are active by default (can be disabled in the [video_looper.ini](https://github.com/AidanNelson/pi_video_looper/blob/master/assets/video_looper.ini)):
 * "ESC" - stops playback and exits video_looper
 * "k" - sKip - stops the playback of current file and plays next file
 * "b" - Back - stops the playback of current file and plays previous file
